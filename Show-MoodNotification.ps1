@@ -41,7 +41,7 @@
 [CmdletBinding(DefaultParameterSetName = 'Run')]
 param (
     [Parameter(ParameterSetName = 'Run')]
-    [string]$LogPath = (Join-Path $PSScriptRoot "MoodLog.txt"),
+    [string]$LogPath = "c:\temp\mood.log",
 
     [Parameter(ParameterSetName = 'Register')]
     [switch]$Register,
@@ -87,7 +87,7 @@ if ($Register) {
     if (-not (Test-Path $AppRegPath)) { New-Item -Path $AppRegPath -Force | Out-Null }
     Set-ItemProperty -Path $AppRegPath -Name 'DisplayName' -Value $AppDisplay
 
-    Write-Host "Registering URI scheme '$UriScheme://'..."
+    Write-Host "Registering URI scheme '$($UriScheme)://'..."
     if (-not (Test-Path $UriRegPath)) { New-Item -Path $UriRegPath -Force | Out-Null }
     Set-ItemProperty -Path $UriRegPath -Name '(Default)'    -Value "URL:$UriScheme Protocol"
     Set-ItemProperty -Path $UriRegPath -Name 'URL Protocol' -Value ''
